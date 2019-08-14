@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/index.js',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    watchContentBase: true
   },
   output: {
     filename: 'main.js',

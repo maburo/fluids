@@ -1,0 +1,28 @@
+#+STARTUP: latexpreview
+
+[[https://www.memo.tv/2009/msafluid/][Msa fluid - opensource lib]]
+[[https://github.com/weymouth/lily-pad][Lity pad]]
+[[https://mikeash.com/pyblog/fluid-simulation-for-dummies.html][Fluid simulations for dummies]]
+[[https://github.com/CFusion/Real-Time-Fluid-Dynamics-for-Games/blob/master/code/demo.c][github]]
+
+* The equations of fluids
+Navier-Strokes equations
+\[
+\frac{\partial \vec{u}}{\partial t} + \\ 
+\vec{u} \cdot \nabla\vec{u} + \frac{1}{\rho} \nabla{p} = \\
+\vec{g} + v\nabla \cdot \nabla\vec{u}
+\]
+
+\[
+\nabla \cdat \vec{u} = 0
+\]
+
+\[\vec{u}\] - velocity of the fluid (3D velocity - u, v, w)
+\[\rho\] - density of the fluid (1000 \[km/m^3\] water)
+\[p\] - pressure
+\[\vec{g}\] - gravity (9.81 \[m/s^2\] -y axis)
+\[v\] - kinematic viscosity
+
+* Momentum equation
+\[\vec{F} = m\vec{a}\] 
+\[\vec{a} \equiv\ \frac{D\vec{u}}{Dt}\]
