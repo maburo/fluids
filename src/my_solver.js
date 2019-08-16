@@ -174,23 +174,21 @@ class FluidSolver {
   }
 
   velStep(delta) {
-    // console.log('velstep')
-    // delta = 0.1;
-    var u = this.u;
-    var u0 = this.uPrev;
-    var v = this.v;
-    var v0 = this.vPrev;
+    this.addSource(this.u, this.uPrev, delta);
+    this.addSource(this.v, this.vPrev, delta);
+    [this.u, this.uPrev] = swap(this.u, this.uPrev);
+    this.diffuse(1, this.u, this.uPrev, this.visc, delta);
+    [this.v, this.vPrev] = swap(this.v, this.vPrev);
+    this.diffuse(1, this.v, this.vPrev, this.visc, delta);
 
-    this.addSource(u, u0, delta);
-    this.addSource(v, v0, delta);
-    [u, u0] = swap(u, u0);
-    this.diffuse(1, u, u0, this.visc, delta);
-    [v, v0] = swap(v, v0);
-    this.diffuse(1, v, v0, this.visc, delta);
+    this.advect(1, this.u, this.uPrev, this.uPrev, this.vPrev, delta);
+    this.advect(2, this.v, this.vPrev, this.uPrev, this.vPrev, delta);
+    this.project(this.u, this.v, this.uPrev, this.vPrev);
+  }
 
-    this.advect(1, u, u0, u0, v0, delta);
-    this.advect(2, v, v0, u0, v0, delta);
-    this.project(u, v, u0, v0);
+  step(delta) {
+    this.velStep(delta);
+    this.densStep(delta);
   }
 
 }

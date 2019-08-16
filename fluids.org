@@ -5,6 +5,8 @@
 [[https://mikeash.com/pyblog/fluid-simulation-for-dummies.html][Fluid simulations for dummies]]
 [[https://github.com/CFusion/Real-Time-Fluid-Dynamics-for-Games/blob/master/code/demo.c][github]]
 
+https://github.com/CodingTrain/website/tree/master/CodingChallenges/CC_132_FluidSimulation/P5
+
 * The equations of fluids
 Navier-Strokes equations
 \[

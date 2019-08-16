@@ -6,14 +6,16 @@ const Renderer = require('./draw.js');
 const SIZE_X = 100;
 const SIZE_Y = 100;
 const force = 1;
-const source = 10000;
+const source = 1000;
 
 var mousePos = [0, 0];
 var mouseVel = [0, 0];
 var mpos = [2, 2];
 
+const fluid = new Fluid(0.1, .4, 0.0000000000001, SIZE_X);
+const solver = new MyFluidSolver(SIZE_X, SIZE_Y, 1);
 //const solver = new FluidSolver(SIZE_X, SIZE_Y, 100);
-const solver = new MikeAshSolver(SIZE_X, 0.2, 0, 0.0000001);
+//const solver = new MikeAshSolver(SIZE_X, 0.001, .001, 0.000000001);
 //solver.dPrev.ix(50, 50, 1)
 
 const canvas = document.getElementById('canvas');
@@ -80,6 +82,13 @@ var t = Date.now();
 function render() {
   const now = Date.now();
   const delta = now - t;
+
+  //fluid.addDensity(50, 50, 1000000);
+  //fluid.addVelocity(50, 50, .1, 0);
+  //console.log(fluid.density)
+  //fluid.addDensity(mpos[0], mpos[1], 10000000);
+  //fluid.addVelocity(mpos[0], mpos[1], 0.52, 0);
+  //fluid.step();
 
   solver.step(delta);
   renderer.draw(delta, solver.density);

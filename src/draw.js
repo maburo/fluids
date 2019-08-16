@@ -88,15 +88,19 @@ class Render {
   }
 
   dens2colors(d) {
+    var tmp = [];
     for (var i = 0; i < d.length; i++) {
       const val = d[i];
       const from = i * 6 * 3;
       const to = from + 6 * 3;
 
+      tmp.push(val);
       for (var j = from; j < to; j++) {
-        this.colors[j] = val;
+        this.colors[j] = val*.1;
       }
     }
+
+    //console.log('tmp', tmp)
   }
 
   draw(delta, d) {
