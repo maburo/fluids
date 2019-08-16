@@ -1,43 +1,34 @@
 const FluidSolver = require('./fluid_solver.js');
 const MyFluidSolver = require('./my_solver.js');
 const MikeAshSolver = require('./mikeash_solver.js');
+const PSolver = require('./p_solver.js');
 const Renderer = require('./draw.js');
 
 const SIZE_X = 100;
 const SIZE_Y = 100;
-const force = 1;
-const source = 1000;
+const force = 100000;
+const source = 10;
 
 var mousePos = [0, 0];
 var mouseVel = [0, 0];
 var mpos = [2, 2];
 
-const fluid = new Fluid(0.1, .4, 0.0000000000001, SIZE_X);
-const solver = new MyFluidSolver(SIZE_X, SIZE_Y, 1);
+//const fluid = new Fluid(0.1, .4, 0.0000000000001, SIZE_X);
+//const solver = new MyFluidSolver(SIZE_X, SIZE_Y, 1);
 //const solver = new FluidSolver(SIZE_X, SIZE_Y, 100);
 //const solver = new MikeAshSolver(SIZE_X, 0.001, .001, 0.000000001);
-//solver.dPrev.ix(50, 50, 1)
+const solver = new PSolver(SIZE_X, 0.1, 0, 0.0000001);
 
 const canvas = document.getElementById('canvas');
 const gl = canvas.getContext('webgl2');
 const renderer = new Renderer();
-
-// const curr = document.getElementById('curr').getContext('webgl2');
-// const prev = document.getElementById('prev').getContext('webgl2');
-
-
-function clamp(v, min, max) {
-  if (v > max) return max;
-  else if (v < min) return min;
-  return v;
-}
 
 function onMouseMove(e) {
   mpos = [
     Math.floor(e.x / (gl.canvas.width / SIZE_X)),
     Math.floor(e.y / (gl.canvas.height / SIZE_Y))
   ];
-  mouseVel = [(mousePos[0] - e.x) * force, (mousePos[1] - e.y) * force];
+  mouseVel = [(e.x - mousePos[0]) * force, (e.y - mousePos[1]) * force];
 
   solver.addDensity(mpos[0], mpos[1], source);
   solver.addVelocity(mpos[0], mpos[1], mouseVel[0], mouseVel[1]);
@@ -77,23 +68,18 @@ function init(sx, sy) {
   renderer.init(gl, sx, sy);
 }
 
-var t = Date.now();
-
 function render() {
   const now = Date.now();
   const delta = now - t;
 
-  //fluid.addDensity(50, 50, 1000000);
-  //fluid.addVelocity(50, 50, .1, 0);
-  //console.log(fluid.density)
-  //fluid.addDensity(mpos[0], mpos[1], 10000000);
-  //fluid.addVelocity(mpos[0], mpos[1], 0.52, 0);
-  //fluid.step();
-
+  solver.addDensity(50, 50, Math.random() * source);
+  solver.addVelocity(50, 50, Math.random() * force, Math.random() * force);
   solver.step(delta);
+
   renderer.draw(delta, solver.density);
   window.requestAnimationFrame(render);
 }
 
 init(SIZE_X, SIZE_Y);
+var t = Date.now();
 render();
