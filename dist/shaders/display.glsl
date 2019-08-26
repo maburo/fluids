@@ -15,5 +15,6 @@ uniform vec2 texelSize;
 void main() {
   vec3 c = texture2D(uTexture, vUv).rgb;
   float a = max(c.r, max(c.g, c.b));
+  //gl_FragColor = vec4(c, a);
   gl_FragColor = vec4(c, 1.0);
 }

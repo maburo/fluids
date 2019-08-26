@@ -6,6 +6,7 @@
 [[https://github.com/CFusion/Real-Time-Fluid-Dynamics-for-Games/blob/master/code/demo.c][github]]
 
 https://github.com/CodingTrain/website/tree/master/CodingChallenges/CC_132_FluidSimulation/P5
+https://github.com/PavelDoGreat/WebGL-Fluid-Simulation
 
 * The equations of fluids
 Navier-Strokes equations
