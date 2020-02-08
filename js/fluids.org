@@ -1,5 +1,7 @@
 #+STARTUP: latexpreview
 
+Diffusion Wave equations, Saint-Venant Equations
+
 [[https://www.memo.tv/2009/msafluid/][Msa fluid - opensource lib]]
 [[https://github.com/weymouth/lily-pad][Lity pad]]
 [[https://mikeash.com/pyblog/fluid-simulation-for-dummies.html][Fluid simulations for dummies]]
